@@ -12,6 +12,7 @@ else
     echo "Error with flatpak setup, check error.log"
 fi
 
+#adding repos and gpg
 sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
 sudo rpmkeys --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
 printf "[gitlab.com_paulcarroty_vscodium_repo]\nname=download.vscodium.com\nbaseurl=https://download.vscodium.com/rpms/\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg\nmetadata_expire=1h" | sudo tee -a /etc/yum.repos.d/vscodium.repo
@@ -19,6 +20,7 @@ sudo rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
 sudo dnf config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
 sudo dnf install fedora-workstation-repositories
 sudo dnf config-manager --set-enabled google-chrome
+sudo dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
 if [ $? -eq 0 ]; then
     echo "Success"
 else
@@ -60,8 +62,8 @@ else
 fi
 
 # additional apps installation via dnf [docker] [podman] [git] [curl] [dnf-plugin-core] [brave browser] [codium] [flameshot] [sublime text]
-# [neofetch] [terminator terminal] [copyq] [chromium browser] [google chrome browser] [mpv] [vlc] [htop] [qbittorrent]
-sudo dnf install -y docker podman git git-crypt pip3 curl dnf-plugins-core brave-browser codium flameshot sublime-text neofetch terminator copyq chromium google-chrome-stable mpv vlc htop qbittorrent 2>>error.log
+# [neofetch] [terminator terminal] [copyq] [chromium browser] [google chrome browser] [mpv] [vlc] [htop] [qbittorrent] [terraform]
+sudo dnf install -y docker podman git git-crypt pip3 curl dnf-plugins-core brave-browser codium flameshot sublime-text neofetch terminator copyq chromium google-chrome-stable mpv vlc htop qbittorrent terraform 2>>error.log
 if [ $? -eq 0 ]; then
     echo "Success"
 else
