@@ -6,4 +6,4 @@ Script installs applications via dnf and flatpak, adds repos, aliases and enable
 Ansible vault is used for .zshrc file encryption
 
 To run the script use:
-$ sudo bash ./fedora40_kde_spin_up.sh
+$ bash ./fedora40_kde_spin_up.sh

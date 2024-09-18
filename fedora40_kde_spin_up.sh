@@ -13,14 +13,14 @@ else
 fi
 
 #adding repos and gpg
+sudo dnf config-manager --add-repo https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo -y
 sudo rpm --import https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
 sudo rpmkeys --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
-printf "[gitlab.com_paulcarroty_vscodium_repo]\nname=download.vscodium.com\nbaseurl=https://download.vscodium.com/rpms/\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg\nmetadata_expire=1h" | sudo tee -a /etc/yum.repos.d/vscodium.repo
+sudo printf "[gitlab.com_paulcarroty_vscodium_repo]\nname=download.vscodium.com\nbaseurl=https://download.vscodium.com/rpms/\nenabled=1\ngpgcheck=1\nrepo_gpgcheck=1\ngpgkey=https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg\nmetadata_expire=1h" | sudo tee -a /etc/yum.repos.d/vscodium.repo
 sudo rpm -v --import https://download.sublimetext.com/sublimehq-rpm-pub.gpg
-sudo dnf config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo
-sudo dnf install fedora-workstation-repositories
-sudo dnf config-manager --set-enabled google-chrome
-sudo dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+sudo dnf config-manager --add-repo https://download.sublimetext.com/rpm/stable/x86_64/sublime-text.repo -y
+sudo dnf install fedora-workstation-repositories -y
+sudo dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo -y
 if [ $? -eq 0 ]; then
     echo "Success"
 else
@@ -61,9 +61,9 @@ else
     echo "Error with flatpak apps installation, check error.log"
 fi
 
-# additional apps installation via dnf [docker] [podman] [git] [curl] [dnf-plugin-core] [brave browser] [codium] [flameshot] [sublime text]
-# [neofetch] [terminator terminal] [copyq] [chromium browser] [google chrome browser] [mpv] [vlc] [htop] [qbittorrent] [terraform]
-sudo dnf install -y docker podman git git-crypt pip3 curl dnf-plugins-core brave-browser codium flameshot sublime-text neofetch terminator copyq chromium google-chrome-stable mpv vlc htop qbittorrent terraform 2>>error.log
+# additional apps installation via dnf [pip3] [docker] [podman] [git] [curl] [dnf-plugin-core] [brave browser] [codium] [flameshot] [sublime text]
+# [neofetch] [terminator terminal] [copyq] [chromium browser] [mpv] [vlc] [htop] [qbittorrent] [terraform]
+sudo dnf install -y python3-pip docker podman git git-crypt pip3 curl dnf-plugins-core brave-browser codium flameshot sublime-text neofetch terminator copyq chromium mpv vlc htop qbittorrent terraform 2>>error.log
 if [ $? -eq 0 ]; then
     echo "Success"
 else
