@@ -98,7 +98,7 @@ else
 fi
 
 # pip3 instalation packages
-sudo pip3 install -y ansible 2>>error.log
+sudo pip3 install ansible 2>>error.log
 if [ $? -eq 0 ]; then
     echo "Success"
 else
@@ -115,9 +115,8 @@ fi
 
 # zsh setup with extensions and aliases
 sudo dnf install -y zsh 2>>error.log
-chsh -s $(which zsh) 2>>error.log
+cp ~/.zshrc ~/.zshrc.backup  # Backup of current .zshrc
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" 2>>error.log
-cp ~/.zshrc ~/.zshrc.backup  # Backup of current .zshrc 
 cp .zshrc ~/.zshrc 2>>error.log
 if [ $? -eq 0 ]; then
     echo "Success"
